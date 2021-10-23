@@ -1,0 +1,38 @@
+<div class="card">
+
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+  
+    <div class="card-body" *ngIf="nurses$ | async as nurses" >
+      <div class="list-group">
+        <button class="list-group-item list-group-item-action rounded-0"
+                *ngFor="let nurse of nurses"
+                [ngClass]="{'active': nurse?.nurseId === (selectedNurse$ | async)?.nurseId}"
+                (click)="nurseSelected(nurse)"
+                >
+                {{ nurse.firstName }} {{ nurse.lastName }}
+                <ng-container *ngIf="displayCode$ | async">
+                    ({{ nurse.dob | date }})
+                  </ng-container>
+        </button>
+      </div>
+    </div>
+  
+    <div class="card-footer">
+      <div class="row">
+        <input class="form-check-input"
+        type="checkbox"
+        (change)="checkChanged()"
+        [checked]="displayCode$ | async">
+            Display Nurse DOB 
+        <div class="col-md-4 text-right">
+          <button class="btn btn-primary"
+          (click)="newNurse()"
+                  >
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

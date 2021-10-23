@@ -1,0 +1,114 @@
+<div class="card"
+     *ngIf="nurse$ | async as nurse">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+  <div class="card-body">
+      <form novalidate
+        (ngSubmit)="saveNurse(nurse)"
+        [formGroup]="nurseForm"   
+        >
+        <fieldset>   
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">
+                    Nurse First Name
+                </label>
+                <div class="col-md-9">
+                    <input
+                        class="form-control"
+                        type="text"
+                        formControlName="firstName"
+                        [ngClass]="{'is-invalid': displayMessage.firstName }"
+                        placeholder="First Name (required)"
+                        (blur)="blur()"
+                    />
+                    <span class="invalid-feedback"
+                        *ngIf="displayMessage.firstName">
+                            {{displayMessage.firstName}}
+                    </span>
+                </div>
+            </div>       
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">
+                    Nurse Last Name
+                </label>
+                <div class="col-md-9">
+                    <input
+                        class="form-control"
+                        type="text"
+                        formControlName="lastName"
+                        [ngClass]="{'is-invalid': displayMessage.lastName }"
+                        placeholder="Last Name (required)"
+                        (blur)="blur()"
+                    />
+                    <span class="invalid-feedback"
+                        *ngIf="displayMessage.lastName">
+                            {{displayMessage.lastName}}
+                    </span>
+                </div>
+            </div>  
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">
+                    Nurse DOB
+                </label>
+                <div class="col-md-9">
+                    <input
+                    class="form-control"
+                    type="text"
+                    formControlName="dob"
+                    [ngClass]="{'is-invalid': displayMessage.dob }"
+                    placeholder="DOB (required)"
+                    (blur)="blur()"
+                    />
+                    <span class="invalid-feedback"
+                    *ngIf="displayMessage.dob">
+                        {{displayMessage.dob}}
+                </span>                   
+                </div>
+            </div> 
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">
+                    Number of Patients
+                </label>
+                <div class="col-md-9">
+                    <input
+                    class="form-control"
+                    type="text"
+                    formControlName="numberOfPatients"
+                    [ngClass]="{'is-invalid': displayMessage.numberOfPatients}"
+                    placeholder="#Assign patients"
+                    />
+                </div>
+            </div> 
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-2">
+                    <span>
+                        <button class="btn btn-primary"
+                                type="submit"
+                                style="width:80px;margin-right:10px"
+                                [disabled]="!nurseForm.valid || !nurseForm.dirty">
+                          Save
+                        </button>
+                      </span>
+                      <span>
+                        <button class="btn btn-light"
+                                type="button"
+                                style="width:80px;margin-right:10px"
+                                (click)="cancelEdit(nurse)">
+                          Cancel
+                        </button>
+                      </span>
+                      <span>
+                        <button class="btn btn-light"
+                                type="button"
+                                style="width:80px"
+                                (click)="deleteNurse(nurse)">
+                          Delete
+                        </button>
+                      </span>
+                </div>
+            </div>
+        </fieldset>
+      </form>
+  </div>
+</div>
